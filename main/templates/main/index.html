@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Country Weather App</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-image: url('https://cdn-images-1.medium.com/v2/resize:fit:2000/1*kyMlc-fbeMJZ7wjQ7780Rw.jpeg'); /* Background image of Earth */
+      background-size: cover;
+      font-family: 'Arial', sans-serif;
+      color: #333; 
+    }
+
+    .navbar {
+      background-color: rgba(34, 53, 165, 0.938); 
+      color: white;
+      border-bottom: 3px solid #022c63; 
+      text-align: center;
+      
+    }
+
+    .navbar h1 {
+      margin: 0;
+      padding: 15px 0;
+      text-align: center;
+      font-size: 24px; 
+      font-weight: bold; 
+      text-transform: uppercase;
+    }
+
+    .search-form {
+      margin-top: 50px;
+    }
+
+    .search-form .input-group {
+      width: 100%;
+    }
+
+    .search-form .form-control {
+      border-radius: 20px;
+      font-size: 16px; /* Increased font size */
+    }
+
+    .search-form .btn {
+      border-radius: 20px;
+    }
+
+    .weather-info {
+      margin-top: 50px;
+    }
+
+    .weather-info h3 {
+      margin-bottom: 20px;
+      font-size: 20px; /* Increased font size */
+      font-weight: bold; /* Bold font */
+      text-transform: uppercase; /* Uppercase text */
+    }
+
+    .weather-info h4 {
+      font-size: 18px; /* Increased font size */
+      font-weight: bold; /* Bold font */
+      text-transform: uppercase; /* Uppercase text */
+    }
+
+    .weather-info h5 {
+      margin-top: 5px;
+      font-size: 16px; /* Increased font size */
+    }
+
+    .weather-card {
+      background-color: #f9f9f9; /* Light gray background */
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+      padding: 20px;
+    }
+
+    .weather-card h3 {
+      margin-top: 0;
+      color: #004d36; /* Dark green text color */
+    }
+
+    .weather-icon {
+      width: 100px;
+      height: 100px;
+      margin: auto;
+    }
+
+    .search-input {
+      margin-top: 10px;
+      font-size: 14px; /* Increased font size */
+      color: #666; /* Gray text color */
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <h1>Weather App</h1> 
+  </nav>
+
+<div class="container">
+  <div class="row justify-content-center search-form">
+    <form method="post" class="col-md-6">
+      {% csrf_token %}
+      <div class="input-group">
+        <input type="text" class="form-control" name="city" placeholder="Search">
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="submit">
+            <i class="glyphicon glyphicon-search"></i> Search
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="row justify-content-center weather-info">
+    {% if country_code and coordinate and temp and pressure and humidity %}
+    <div class="col-md-6">
+      <div class="weather-card">
+        <h3 class="text-center">Weather Details</h3>
+        <div class="text-center">
+          <img class="weather-icon" src="https://icon-library.com/images/weather-icon-android/weather-icon-android-24.jpg" alt="Weather Icon">
+          <p class="search-input">You searched for: {{ request.POST.city }}</p> <!-- Display the user input -->
+        </div>
+        <div class="text-center mt-3">
+          <h4>Country Code: {{ country_code }}</h4>
+          <p>Latitude: {{ coordinatelat }}</p>
+          <p>Longitude: {{ coordinate }}</p>
+          <p>Temperature: {{ temp }}</p>
+          <p>Pressure: {{ pressure }}</p>
+          <p>Humidity: {{ humidity }}</p>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+</body>
+
+</html>
