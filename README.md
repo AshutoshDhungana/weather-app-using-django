@@ -1,0 +1,1 @@
+This is a basic weather web application, whihc uses OpenWeather's api to fetch the weather data from around the globe and then with the help of Html and Css in the front end the users can view the country_code, latitude, longitude, the temperature, pressure and humidity of that specific place.
